@@ -1,0 +1,38 @@
+{% load static %}
+<head>
+</head>
+<link rel="stylesheet" href="{% static 'language/style.css' %}?after">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+<div class="nevigation" id="Nevigation">
+  <div class='left' id='left'>
+    <h1 onClick="location.href='http://127.0.0.1:8000/signlanguage'">🤟   수화 해석기</h1>
+  </div>
+  <div>
+    <button onClick="location.href='http://127.0.0.1:8000/signlanguage'">HOME</button>
+    <button onClick="location.href='http://127.0.0.1:8000/signlanguage/manage'">모델관리</button>
+    <button onClick="location.href='http://127.0.0.1:8000/admin'">ADMIN</button>
+  </div>
+</div>
+
+<div style='display:flex'>
+  {% for r in result %}
+    <div class='{{r.correct}}' style='flex:0'>
+      <div class='image' style="text-align : center;">
+          <img src="{{ r.image.url }}" width="300px" height=300px>
+      </div>
+      <div class='result'>
+        <div class='pred' style="text-align : center;">
+          예측 결과 : {{ r.result }}
+        </div>
+        <div class='answer' style="text-align : center;">
+          정답  : {{ r.answer }}
+        </div>
+      </div>
+
+      <div style="text-align : center;">
+          {{r.correct}}
+      </div>
+    </div >
+  {% endfor %}
+  </div>

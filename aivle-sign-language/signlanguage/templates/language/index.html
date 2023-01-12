@@ -1,0 +1,69 @@
+{% load static %}
+<head>
+</head>
+<link rel="stylesheet" href="{% static 'language/style.css' %}?after">
+
+<div class="nevigation" id="Nevigation">
+    <div class='left' id='left'>
+      <h1 onClick="location.href='http://127.0.0.1:8000/signlanguage'">🤟   수화 해석기</h1>
+    </div>
+    <div>
+        <button onClick="location.href='http://127.0.0.1:8000/signlanguage'">HOME</button>
+        <button onClick="location.href='http://127.0.0.1:8000/signlanguage/manage'">모델관리</button>
+        <button onClick="location.href='http://127.0.0.1:8000/admin'">ADMIN</button>
+      </div>
+</div>
+
+<form action="upload" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{AiModelform.as_table}}
+    </table>
+    <div id='Nodes'>
+    <fieldset id='Node0' style="flex:0">
+        <legend><h1>파일 업로드</h1></legend>
+        <input name="files" type="file">
+        <br><br>
+        <div>정답 : <input name="answer" type="text"></div> 
+    </fieldset>
+    </div>
+        
+    <div class='submit_button'>
+        <div><input type='button' value="파일 추가" onclick="addFile();"></div>
+        <div><input type="submit" value="업로드"></div>
+    </div>
+</form>
+
+<script type="text/javascript">
+
+    let idNum = 0;    
+
+    function addFile(){
+        const u = document.getElementById('Node'+idNum);
+        if(document.querySelector("#Node"+idNum+" > input[type=file]").value==''){
+            swal('파일추가 실패!', '파일을 등록해주세요.', 'error');
+            return;
+        }
+        if(document.querySelector("#Node"+idNum+"> div > input[type=text]").value==''){
+            swal('파일추가 실패!', '정답을 등록해주세요.', 'error');
+            return;
+        }
+        if(idNum>=5){
+            swal('파일추가 실패!', '파일은 5개까지 등록 가능합니다.', 'error');
+            return;
+        }
+
+        swal('파일추가 성공!', '', 'success');
+        const new_u = u.cloneNode(true);
+
+        idNum++;
+        new_u.id='Node'+idNum;
+        u.after(new_u);
+    }
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

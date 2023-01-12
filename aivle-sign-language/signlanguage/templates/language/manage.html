@@ -1,0 +1,58 @@
+{% load static %}
+<head>
+</head>
+<link rel="stylesheet" href="{% static 'language/style.css' %}?after">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+<div class="nevigation" id="Nevigation" style='display:flex'>
+  <div class='left' id='left'>
+    <h1 onClick="location.href='http://127.0.0.1:8000/signlanguage'">🤟   수화 해석기</h1>
+  </div>
+  <div>
+    <button onClick="location.href='http://127.0.0.1:8000/signlanguage'">HOME</button>
+    <button onClick="location.href='http://127.0.0.1:8000/signlanguage/manage'">모델관리</button>
+    <button onClick="location.href='http://127.0.0.1:8000/admin'">ADMIN</button>
+  </div>
+</div>
+
+<div class='ai_model'>
+  <div class='manage_form'>
+    <form action="manage" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <div class='update'>
+          <div><input type="submit" value="업데이트"></div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class='model_container'>
+    <div class='models'>
+      <span>모델 목록</span>
+      
+      {% for model in ai_models %}
+        <button id='{{model.is_selected}}' class='container' onclick='model_select(this);' value='{{model.is_selected}}'>
+          모델명 :  {{model.is_selected}}
+        </button>
+        <div>
+          파일이름 :  {{model.ai_file}}
+        </div>
+        <div>
+          버전 :  {{model.version}}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function model_select(e){
+    let id = e.getAttribute('id')
+    swal('해당 모델이 선택되었습니다.', id, 'success');
+    return;
+  }
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
