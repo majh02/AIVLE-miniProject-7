@@ -3,6 +3,7 @@
 
 <br><br>  
 ## 시연영상
+> 시연영상 링크 (https://youtu.be/Wo6r7hDE-Tk)
 <img src="https://user-images.githubusercontent.com/52205425/212012674-eabf2fd3-2c26-4ef8-8970-4322e8e43807.gif">
 
 <br><br>
