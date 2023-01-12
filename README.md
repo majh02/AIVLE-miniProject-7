@@ -1,11 +1,17 @@
 # AIVLE-miniProject-7
 에이블스쿨 미니프로젝트 7차 : 수화번역기 웹사이트(HTML&amp;CSS + Django + Keras CNN)
 
+
 ---
+
+
 ## 시연영상
 <img src="https://user-images.githubusercontent.com/52205425/212012674-eabf2fd3-2c26-4ef8-8970-4322e8e43807.gif">
 
+
 ---
+
+
 ## 개발 환경   
 * Front
 
